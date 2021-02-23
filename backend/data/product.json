@@ -5,7 +5,58 @@
     "description": " Garansi Resmi 3 Bulan. dapatkan produk original M-Tech hanya di sini, klik link di bawah ini https://www.tokopedia.com/m-techofficial",
     "ratings": "4.8",
     "images": [{
-      "public_id": ""
-    }]
+      "public_id": "a1lmdlasjf",
+      "url": "asdjklsajdlaskdklasjdslakjdklsajdksa"
+    }],
+    "category": "Food",
+    "seller": "toono",
+    "stock": 400,
+    "numOfReviews": 1,
+    "reviews": []
+  },
+  {
+    "name": "M-Tech Original Mouse",
+    "price": "49.850",
+    "description": " Garansi Resmi 3 Bulan. dapatkan produk original M-Tech hanya di sini, klik link di bawah ini https://www.tokopedia.com/m-techofficial",
+    "ratings": "4.8",
+    "images": [{
+      "public_id": "a1lmdlasjf",
+      "url": "asdjklsajdlaskdklasjdslakjdklsajdksa"
+    }],
+    "category": "Food",
+    "seller": "toono",
+    "stock": 400,
+    "numOfReviews": 1,
+    "reviews": []
+  },
+  {
+    "name": "Power supply",
+    "price": "49.850",
+    "description": " Garansi Resmi 3 Bulan. dapatkan produk original M-Tech hanya di sini, klik link di bawah ini https://www.tokopedia.com/m-techofficial",
+    "ratings": "4.8",
+    "images": [{
+      "public_id": "a1lmdlasjf",
+      "url": "asdjklsajdlaskdklasjdslakjdklsajdksa"
+    }],
+    "category": "Electronics",
+    "seller": "toono",
+    "stock": 400,
+    "numOfReviews": 1,
+    "reviews": []
+  },
+  {
+    "name": "Dota 2 ",
+    "price": "49.850",
+    "description": " Garansi Resmi 3 Bulan. dapatkan produk original M-Tech hanya di sini, klik link di bawah ini https://www.tokopedia.com/m-techofficial",
+    "ratings": "4.8",
+    "images": [{
+      "public_id": "a1lmdlasjf",
+      "url": "asdjklsajdlaskdklasjdslakjdklsajdksa"
+    }],
+    "category": "Sports",
+    "seller": "toono",
+    "stock": 400,
+    "numOfReviews": 1,
+    "reviews": []
   }
 ]
