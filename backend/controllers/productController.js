@@ -11,7 +11,7 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-exports.getProducts = async (req, res, next) => {
+exports.getProducts = catchAsyncErrors(async (req, res, next) => {
   const products = await Product.find();
 
   if (products.length < 1) {
@@ -23,9 +23,9 @@ exports.getProducts = async (req, res, next) => {
     success: true,
     products,
   });
-};
+});
 
-exports.getById = async (req, res, next) => {
+exports.getById = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
@@ -36,16 +36,13 @@ exports.getById = async (req, res, next) => {
     success: true,
     product,
   });
-};
+});
 
-exports.updateProduct = async (req, res, next) => {
+exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
 
   if (!product) {
-    return res.status(404).json({
-      success: false,
-      message: 'product not found',
-    });
+    return next(new ErrorHandler('Product not found', 404));
   }
 
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
@@ -57,9 +54,9 @@ exports.updateProduct = async (req, res, next) => {
     success: true,
     product,
   });
-};
+});
 
-exports.deleteProduct = async (req, res, next) => {
+exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
   Product.findByIdAndRemove(
     req.params.id,
     { useFindAndModify: false },
@@ -72,4 +69,4 @@ exports.deleteProduct = async (req, res, next) => {
       });
     }
   );
-};
+});
