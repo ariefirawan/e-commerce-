@@ -1,4 +1,4 @@
-// const ErrorHandler = require('../utils/errorHandler');
+const ErrorHandler = require('../utils/errorHandler');
 
 module.exports = (err, req, res, next) => {
   err.errorCode = err.errorCode || 500;
@@ -17,6 +17,18 @@ module.exports = (err, req, res, next) => {
     let error = { ...err };
 
     error.message = err.message;
+
+    // Wrong mongoose object ID error
+    if(err.name === 'CastError'){
+      const message = `Resource not found. Invalid: ${err.path}`;
+      error = new ErrorHandler(message, 400)
+    }
+
+    // Handling mongoose Validation error
+    if(err.name === 'ValidationError'){
+      const message= Object.values(err.errors).map(value => value.message)
+      error = new ErrorHandler(message, 400)
+    }
 
     res.status(error.errorCode).json({
       success: false,
