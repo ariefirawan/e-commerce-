@@ -6,8 +6,10 @@ const errorMiddlewares = require('./middlewares/errors');
 app.use(express.json());
 
 //imports all routes
+const auth = require('./routes/auth');
 const products = require('./routes/products');
 
+app.use('/api/v1', auth);
 app.use('/api/v1', products);
 
 //middleware to handle error
