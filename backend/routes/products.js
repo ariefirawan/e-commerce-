@@ -10,7 +10,7 @@ const {
 } = require('../controllers/productController');
 const { isAuthenticated, authorizeRoles } = require('../middlewares/auth');
 
-router.route('/products').get(getProducts);
+router.route('/products').get(isAuthenticated, getProducts);
 router.route('/products/:id').get(getById);
 
 router
