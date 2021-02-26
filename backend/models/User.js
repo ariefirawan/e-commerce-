@@ -22,6 +22,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
     minLength: [6, 'Your password must be longer than 6 characters'],
+    //fungsi select untuk menghilangkan kolom password pada saat get database
     select: false,
   },
   avatar: {
