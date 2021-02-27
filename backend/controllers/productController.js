@@ -4,7 +4,7 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const APIFeatures = require('../utils/apiFeatures');
 
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
-  req.body.user = req.user._id
+  req.body.user = req.user._id;
   const product = await Product.create(req.body);
 
   res.status(201).json({
@@ -19,7 +19,7 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
   const apiFeatures = new APIFeatures(Product.find(), req.query)
     .search()
     .filter()
-    .pagination(resPerPage)
+    .pagination(resPerPage);
   const products = await apiFeatures.query;
 
   // if (products.length < 1) {
@@ -78,4 +78,84 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
       });
     }
   );
+});
+
+// create review product => /api/v1/review
+exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
+  const { rating, comment, productId } = req.body;
+
+  const review = {
+    user: req.user._id,
+    name: req.user.name,
+    rating,
+    comment,
+  };
+
+  const product = await Product.findById(productId);
+
+  const isReview = product.reviews.find(
+    (p) => p.user.toString() === req.user._id.toString()
+  );
+
+  console.log(isReview);
+
+  if (isReview) {
+    product.reviews.forEach((review) => {
+      if (review.user.toString() === req.user._id.toString()) {
+        (review.comment = comment), (review.rating = rating);
+      }
+    });
+  } else {
+    product.reviews.push(review);
+    product.numOfReviews = product.reviews.length;
+  }
+
+  product.ratings =
+    product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+    product.reviews.length;
+  await product.save({ validateBeforeSave: false });
+
+  res.status(200).json({ success: true });
+});
+
+// get product review product => /api/v1/review?id=
+exports.getReviewProduct = catchAsyncErrors(async (req, res, next) => {
+  const product = await Product.findById(req.query.id);
+
+  res.status(200).json({
+    success: true,
+    reviews: product.reviews,
+  });
+});
+
+// delete review product => /api/v1/review?productId=&id=
+exports.deleteReviewProduct = catchAsyncErrors(async (req, res, next) => {
+  const products = await Product.findById(req.query.productId);
+
+  const reviews = products.reviews.filter(
+    (review) => review._id.toString() !== req.query.id.toString()
+  );
+
+  const numOfReviews = reviews.length;
+
+  const ratings =
+    products.reviews.reduce((acc, item) => item.rating + acc, 0) / numOfReviews;
+
+  await Product.findByIdAndUpdate(
+    req.query.productId,
+    {
+      ratings,
+      numOfReviews,
+      reviews,
+    },
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
+
+  res.status(200).json({
+    success: true,
+  });
 });
