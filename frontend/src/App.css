@@ -247,8 +247,7 @@ nav {
   text-align: center;
 }
 
-.plus,
-minus {
+.plus.minus {
   width: 3rem;
   text-align: center;
   padding: 0.1rem 0.5rem;
@@ -269,14 +268,15 @@ minus {
 .wrapper {
   width: 100%;
   min-height: 100vh;
-  min-height: 100vh;
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: center;
   align-items: center;
+
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+
   font-weight: 700;
 }
 
