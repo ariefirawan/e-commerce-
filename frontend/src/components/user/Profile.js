@@ -26,7 +26,7 @@ const Profile = () => {
                     className="rounded-circle img-fluid"
                   />
                 </figure>
-                <Link className="btn btn-primary btn-block my-5">
+                <Link to='/me/update' className="btn btn-primary btn-block my-5">
                   Edit Profile
                 </Link>
               </div>

@@ -11,7 +11,6 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 
 //register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-
   const { name, email, password } = req.body;
 
   const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
@@ -26,7 +25,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     password,
     avatar: { public_id: result.public_id, url: result.url },
   });
-  
+
   sendToken(user, 200, res);
 });
 
@@ -62,6 +61,23 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     email: req.body.email,
   };
 
+  if (req.body.avatar !== '') {
+    const user = await User.findById(req.user.id);
+
+    const image_id = user.avatar.public_id;
+    const res = await cloudinary.v2.uploader.destroy(image_id);
+
+    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: 'avatars',
+      width: 150,
+      crop: 'scale',
+    });
+
+    newUserData.avatar = {
+      public_id: result.public_id,
+      url: result.secure_url,
+    };
+  }
   const user = await User.findByIdAndUpdate(req.user._id, newUserData, {
     new: true,
     runValidators: true,

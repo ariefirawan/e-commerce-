@@ -13,8 +13,8 @@ const Login = ({ history }) => {
   const [password, setPassword] = useState('');
 
   const alert = useAlert();
-
   const dispatch = useDispatch();
+
   const { isAuthenticated, error, loading } = useSelector(
     (state) => state.auth
   );
@@ -26,7 +26,7 @@ const Login = ({ history }) => {
 
     if (error) {
       alert.error(error);
-      dispatch(clearErrors);
+      dispatch(clearErrors());
     }
   }, [dispatch, alert, isAuthenticated, error, history]);
 
@@ -34,30 +34,26 @@ const Login = ({ history }) => {
     e.preventDefault();
     dispatch(login(email, password));
   };
+  
   return (
     <Fragment>
-      {loading ? (
+      {loading ? 
         <Loader />
-      ) : (
+       : (
         <Fragment>
           <MetaData title={'Login'} />
-          <div className="wrapper row">
+          <div className="row wrapper">
             <div className="col-10 col-lg-5">
-              <form
-                className="shadow-lg"
-                onSubmit={(e) => {
-                  submitHandler(e);
-                }}
-              >
+              <form className="shadow-lg" onSubmit={submitHandler}>
                 <h1 className="mb-3">Login</h1>
                 <div className="form-group">
                   <label htmlFor="email_field">Email</label>
                   <input
                     type="email"
                     id="email_field"
+                    className="form-control"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="form-control"
                   />
                 </div>
                 <div className="form-group">
@@ -65,9 +61,9 @@ const Login = ({ history }) => {
                   <input
                     type="password"
                     id="password_field"
+                    className="form-control"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="form-control"
                   />
                 </div>
 
