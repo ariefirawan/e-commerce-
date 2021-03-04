@@ -42,14 +42,14 @@ const Register = ({ history }) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.set('name', name);
-    formData.set('email', email);
-    formData.set('password', password);
-    formData.set('avatar', avatar);
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('avatar', avatar);
 
-    // console.log(user);
+    console.log(formData);
 
-    dispatch(register(user));
+    dispatch(register(formData));
   };
 
   const onChange = (e) => {
@@ -79,7 +79,7 @@ const Register = ({ history }) => {
             encType="multipart/form-data"
           >
             <h1 className="mb-3">Register</h1>
-            
+
             <div className="form-group">
               <label htmlFor="email_field">Name</label>
               <input
@@ -107,7 +107,7 @@ const Register = ({ history }) => {
               <input
                 type="password"
                 name="password"
-                id='password_field'
+                id="password_field"
                 className="form-control"
                 value={password}
                 onChange={onChange}

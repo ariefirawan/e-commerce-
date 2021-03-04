@@ -6,6 +6,11 @@ import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  LOAD_USER_REQUEST,
+  LOAD_USER_SUCCESS,
+  LOAD_USER_FAIL,
+  LOGOUT_USER_SUCCESS,
+  LOGOUT_USER_FAIL,
   CLEAR_ERRORS,
 } from '../contants/userTypes';
 
@@ -53,9 +58,9 @@ export const register = (userData) => async (dispatch) => {
         'Content-Type': 'multipart/form-data',
       },
     };
+    console.log(userData);
 
     const { data } = await axios.post('/api/v1/register', userData, config);
-
     dispatch({
       type: REGISTER_SUCCESS,
       payload: data.user,
@@ -63,6 +68,37 @@ export const register = (userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: REGISTER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const loadUser = () => async (dispatch) => {
+  try {
+    dispatch({ type: LOAD_USER_REQUEST });
+
+    const { data } = await axios.get('/api/v1/me');
+
+    dispatch({
+      type: LOAD_USER_SUCCESS,
+      payload: data.user,
+    });
+  } catch (error) {
+    dispatch({
+      type: LOAD_USER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const logoutUser = () => async (dispatch) => {
+  try {
+    await axios.get('/api/v1/logout');
+
+    dispatch({ type: LOGOUT_USER_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: LOGOUT_USER_FAIL,
       payload: error.response.data.message,
     });
   }

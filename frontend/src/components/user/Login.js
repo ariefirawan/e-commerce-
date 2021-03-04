@@ -43,7 +43,12 @@ const Login = ({ history }) => {
           <MetaData title={'Login'} />
           <div className="wrapper row">
             <div className="col-10 col-lg-5">
-              <form className="shadow-lg" onSubmit={submitHandler}>
+              <form
+                className="shadow-lg"
+                onSubmit={(e) => {
+                  submitHandler(e);
+                }}
+              >
                 <h1 className="mb-3">Login</h1>
                 <div className="form-group">
                   <label htmlFor="email_field">Email</label>
@@ -56,7 +61,7 @@ const Login = ({ history }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password_field">Email</label>
+                  <label htmlFor="password_field">Password</label>
                   <input
                     type="password"
                     id="password_field"
