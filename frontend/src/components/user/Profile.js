@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import MetaData from '../layout/MetaData';
 import Loader from '../layout/Loader';
@@ -26,7 +26,10 @@ const Profile = () => {
                     className="rounded-circle img-fluid"
                   />
                 </figure>
-                <Link to='/me/update' className="btn btn-primary btn-block my-5">
+                <Link
+                  to="/me/update"
+                  className="btn btn-primary btn-block my-5"
+                >
                   Edit Profile
                 </Link>
               </div>
