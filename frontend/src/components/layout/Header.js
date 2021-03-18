@@ -13,6 +13,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const { user, loading } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -34,7 +35,7 @@ const Header = () => {
             Cart
           </span>
           <span className="ml-1" id="cart_count">
-            2
+            {cartItems.length}
           </span>
           {user ? (
             <div className="ml-4 dropdown d-inline">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { UPDATE_PROFILE_RESET } from '../../contants/userTypes';
+// import { UPDATE_PROFILE_RESET } from '../../contants/userTypes';
 import {
   clearErrors,
   loadUser,
@@ -48,7 +48,7 @@ const UpdateProfile = ({ history }) => {
       //   type: UPDATE_PROFILE_RESET,
       // });
     }
-  }, [dispatch, alert, error, history, isUpdated]);
+  }, [dispatch, alert, error, history, isUpdated, user]);
 
   const submitHandler = (e) => {
     e.preventDefault();
