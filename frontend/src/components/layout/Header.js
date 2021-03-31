@@ -31,9 +31,11 @@ const Header = () => {
           <Route render={({ history }) => <Search history={history} />} />
         </div>
         <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
-          <span id="cart" className="mt-3">
-            Cart
-          </span>
+          <Link to='/cart' className='btn'>
+            <span id="cart" className="mt-3">
+              Cart
+            </span>
+          </Link>
           <span className="ml-1" id="cart_count">
             {cartItems.length}
           </span>

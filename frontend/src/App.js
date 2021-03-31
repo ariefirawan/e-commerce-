@@ -13,6 +13,7 @@ import UpdatePassword from './components/user/UpdatePassword';
 import ForgotPassword from './components/user/ForgotPassword';
 import NewPassword from './components/user/NewPassword';
 import Cart from './components/cart/Cart';
+import Shipping from './components/cart/Shipping';
 import ProtectedRoutes from './components/route/ProtectedRoutes';
 
 import { loadUser } from './actions/userActions';
@@ -34,6 +35,7 @@ function App() {
           <Route path="/product/:id" component={ProductDetail} exact />
 
           <Route path="/cart" component={Cart} exact />
+          <ProtectedRoutes path="/shipping" component={Shipping} exact />
 
           <Route path="/register" component={Register} exact />
           <Route path="/login" component={Login} />

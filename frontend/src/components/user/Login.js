@@ -8,7 +8,7 @@ import { clearErrors, login } from '../../actions/userActions';
 import Loader from '../layout/Loader';
 import MetaData from '../layout/MetaData';
 
-const Login = ({ history }) => {
+const Login = ({ history, location }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,9 +19,13 @@ const Login = ({ history }) => {
     (state) => state.auth
   );
 
+  console.log(location);
+
+  const redirect = location.search ? location.search.split('=')[1] : '/';
+
   useEffect(() => {
     if (isAuthenticated) {
-      history.push('/');
+      history.push(redirect);
     }
 
     if (error) {
@@ -34,12 +38,12 @@ const Login = ({ history }) => {
     e.preventDefault();
     dispatch(login(email, password));
   };
-  
+
   return (
     <Fragment>
-      {loading ? 
+      {loading ? (
         <Loader />
-       : (
+      ) : (
         <Fragment>
           <MetaData title={'Login'} />
           <div className="row wrapper">
