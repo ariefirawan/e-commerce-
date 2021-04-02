@@ -352,6 +352,11 @@ nav {
   margin-right: -1px;
 }
 
+.active-step {
+  background: #fa9c23;
+  color: #fff;
+}
+
 .triangle-active {
   float: left;
   width: 0;
