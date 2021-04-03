@@ -12,6 +12,9 @@ import UpdateProfile from './components/user/UpdateProfile';
 import UpdatePassword from './components/user/UpdatePassword';
 import ForgotPassword from './components/user/ForgotPassword';
 import NewPassword from './components/user/NewPassword';
+import Cart from './components/cart/Cart';
+import Shipping from './components/cart/Shipping';
+import ConfirmOrder from './components/cart/ConfirmOrder';
 import ProtectedRoutes from './components/route/ProtectedRoutes';
 
 import { loadUser } from './actions/userActions';
@@ -31,6 +34,14 @@ function App() {
           <Route path="/" component={Home} exact />
           <Route path="/search/:keyword" component={Home} />
           <Route path="/product/:id" component={ProductDetail} exact />
+
+          <Route path="/cart" component={Cart} exact />
+          <ProtectedRoutes path="/shipping" component={Shipping} exact />
+          <ProtectedRoutes
+            path="/order/confirm"
+            component={ConfirmOrder}
+            exact
+          />
 
           <Route path="/register" component={Register} exact />
           <Route path="/login" component={Login} />

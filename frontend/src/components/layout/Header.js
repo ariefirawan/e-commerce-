@@ -13,6 +13,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const { user, loading } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -30,11 +31,13 @@ const Header = () => {
           <Route render={({ history }) => <Search history={history} />} />
         </div>
         <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
-          <span id="cart" className="mt-3">
-            Cart
-          </span>
+          <Link to='/cart' className='btn'>
+            <span id="cart" className="mt-3">
+              Cart
+            </span>
+          </Link>
           <span className="ml-1" id="cart_count">
-            2
+            {cartItems.length}
           </span>
           {user ? (
             <div className="ml-4 dropdown d-inline">
